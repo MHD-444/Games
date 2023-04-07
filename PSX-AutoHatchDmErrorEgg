@@ -40,71 +40,6 @@ Blunder.getAndClear = function(...)
    return OldGet(Packet)
 end
 
-local lib = require(game:GetService("ReplicatedStorage"):WaitForChild("Framework"):WaitForChild("Library"))
-local EggAnimation = game.Players.LocalPlayer.PlayerScripts.Scripts.Game['Open Eggs']
-local BackAnimation = getsenv(EggAnimation).OpenEgg
-local Network = require(game:GetService("ReplicatedStorage").Library.Client.Network)
-debug.setupvalue(Network.Invoke, 1, function() return true end)
-InAprilFools = false
-
-if getgenv().NoEggAnimation == true then
-    getsenv(EggAnimation).OpenEgg = function() return end
-else
-    getsenv(EggAnimation).OpenEgg = BackAnimation
-end
-
-if lib.WorldCmds.Get() == "April Fools" then
-    InAprilFools = true
-else
-    if syn then
-        syn_context_set(2)
-    else
-        setthreadcontext(2)
-    end
-    lib.WorldCmds.Load("April Fools")
-    if syn then
-        syn_context_set(1)
-    else
-        setthreadcontext(1)
-    end
-    wait(3)
-    InAprilFools = true
-end
-
-if getgenv().AutoHatchDmError == true and InAprilFools == true then
-    --game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame  = game:GetService("Workspace").__MAP.Interactive["April Fools Secret"].Interact.CFrame * CFrame.new(0,1,0)
-    game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1414.6854248046875, 344.31390380859375, -672.635498046875)
-    wait(0.1)
-    game.Players:Chat("pls open")
-    game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("pls open", "All")
-    wait(2)
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame  = game:GetService("Workspace").__MAP.Eggs["April Fools Secret Eggs"].PLATFORM.SectionName.CFrame * CFrame.new(0,1,0)
-    while getgenv().AutoHatchDmError == true and task.wait() do
-        if getgenv().AutoHatchDmError == true and getgenv().HatchType == 'Single' then
-            local args = {
-                [1] = "Diamond Error Egg",
-                [2] = false,
-                [3] = false
-            }
-            Network.Invoke("Buy Egg", unpack(args))
-        elseif getgenv().AutoHatchDmError == true and getgenv().HatchType == 'Triple' then
-            local args = {
-                [1] = "Diamond Error Egg",
-                [2] = true,
-                [3] = false
-            }
-            Network.Invoke("Buy Egg", unpack(args))
-        elseif getgenv().AutoHatchDmError == true and getgenv().HatchType == 'Octuple' then
-            local args = {
-                [1] = "Diamond Error Egg",
-                [2] = false,
-                [3] = true
-            }
-            Network.Invoke("Buy Egg", unpack(args))
-        end
-    end
-end
-
 if getgenv().UseEggsCounter ~= true then
     if game.CoreGui:FindFirstChild("FPSCounter") then
         game.CoreGui:FindFirstChild("FPSCounter"):Destroy()
@@ -201,4 +136,69 @@ if getgenv().UseEggsCounter == true then
         end
     end
     game:GetService("RunService").Heartbeat:Connect(UpdateHatchedEggs)
+end
+
+local lib = require(game:GetService("ReplicatedStorage"):WaitForChild("Framework"):WaitForChild("Library"))
+local EggAnimation = game.Players.LocalPlayer.PlayerScripts.Scripts.Game['Open Eggs']
+local BackAnimation = getsenv(EggAnimation).OpenEgg
+local Network = require(game:GetService("ReplicatedStorage").Library.Client.Network)
+debug.setupvalue(Network.Invoke, 1, function() return true end)
+InAprilFools = false
+
+if getgenv().NoEggAnimation == true then
+    getsenv(EggAnimation).OpenEgg = function() return end
+else
+    getsenv(EggAnimation).OpenEgg = BackAnimation
+end
+
+if lib.WorldCmds.Get() == "April Fools" then
+    InAprilFools = true
+else
+    if syn then
+        syn_context_set(2)
+    else
+        setthreadcontext(2)
+    end
+    lib.WorldCmds.Load("April Fools")
+    if syn then
+        syn_context_set(1)
+    else
+        setthreadcontext(1)
+    end
+    wait(3)
+    InAprilFools = true
+end
+
+if getgenv().AutoHatchDmError == true and InAprilFools == true then
+    --game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame  = game:GetService("Workspace").__MAP.Interactive["April Fools Secret"].Interact.CFrame * CFrame.new(0,1,0)
+    game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1414.6854248046875, 344.31390380859375, -672.635498046875)
+    wait(0.1)
+    game.Players:Chat("pls open")
+    game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("pls open", "All")
+    wait(2)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame  = game:GetService("Workspace").__MAP.Eggs["April Fools Secret Eggs"].PLATFORM.SectionName.CFrame * CFrame.new(0,1,0)
+    while getgenv().AutoHatchDmError == true and task.wait() do
+        if getgenv().AutoHatchDmError == true and getgenv().HatchType == 'Single' then
+            local args = {
+                [1] = "Diamond Error Egg",
+                [2] = false,
+                [3] = false
+            }
+            Network.Invoke("Buy Egg", unpack(args))
+        elseif getgenv().AutoHatchDmError == true and getgenv().HatchType == 'Triple' then
+            local args = {
+                [1] = "Diamond Error Egg",
+                [2] = true,
+                [3] = false
+            }
+            Network.Invoke("Buy Egg", unpack(args))
+        elseif getgenv().AutoHatchDmError == true and getgenv().HatchType == 'Octuple' then
+            local args = {
+                [1] = "Diamond Error Egg",
+                [2] = false,
+                [3] = true
+            }
+            Network.Invoke("Buy Egg", unpack(args))
+        end
+    end
 end
